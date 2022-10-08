@@ -52,7 +52,7 @@ public class LevelGenInit {
 	 * 
 	 * 当Modでは3つの追加地形生成サンプルを用意してある
 	 * jsonの記述のみでバニラで用意されたfeatureを指定し、水底に金鉱石を生成する
-	 * 同様に、追加ブロックであるマクガフィン鉱石を生成する
+	 * 同様に、jsonのみの記述で追加ブロックであるマクガフィン鉱石を地下に生成する
 	 * javaの記述のみでグロウストーンの柱の生成処理を追加する
 	 * もちろんjavaとjsonを組み合わせて使用することも可能
 	 * おそらく大半の地形生成はjsonのみ、あるいはFeatureのみ作成、残りはjsonの記述で事足りる
@@ -84,7 +84,7 @@ public class LevelGenInit {
 	/**
 	 * Feature
 	 * 実際の地形生成処理の部分（座標とコンフィグが渡されて、それを元に何かしらをワールドに設置する）
-	 * デフォルトにない形状で地形生成を行いたい場合であっても（大きな鉱脈を作る、など）
+	 * デフォルトにない形状で地形生成を行いたい場合であっても（複合種類の鉱脈を作る、など）
 	 * Feature及びFeatureConfigurationのみを自作して、あとはjsonで設定するというのが楽であるように思える
 	 */
 	static final RegistryObject<Feature<ExampleFeatureConfiguration>> EXAMPLE_FEATUR =
