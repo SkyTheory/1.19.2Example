@@ -1,0 +1,7 @@
+// 1.19.2	2022-10-08T23:19:12.8594989	LootTables
+5eb9b6b6c61e261e65238c8b626793226cdb058d data/st_example/loot_tables/blocks/deepslate_macguffin_ore.json
+9c3e8a40e5e51bf95f74296bcdc74c0b6003743e data/st_example/loot_tables/blocks/example_block_entity.json
+26f09e0921e3a145c7b3c6f15ca9c5e13d7fb13e data/st_example/loot_tables/blocks/macguffin_block.json
+ee14806e846d54c8e0353113dcf451b4c564d67f data/st_example/loot_tables/blocks/macguffin_ore.json
+ac66ec7e64c455043bb1d283d4cb9133b35f24ee data/st_example/loot_tables/blocks/muffin_block.json
+57cd489533810b233f33284d621fb5a7595ed20c data/st_example/loot_tables/entities/example_entity.json

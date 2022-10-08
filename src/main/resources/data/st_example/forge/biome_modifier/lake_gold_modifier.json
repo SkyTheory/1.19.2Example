@@ -1,0 +1,12 @@
+{
+	"__comment": [
+		"Forgeに用意されたBiomeModifierを用いて、地形生成を登録する",
+		"featuresではPlacedFeatureを渡すこと。placed_featureに置いたjsonファイルの名前を指定すれば大丈夫",
+		"minecraft:is_overworldがタグ付けされたバイオームに対して、st_example:lake_gold_placeの地形生成処理を登録する",
+		"stepは地形生成のタイミング、net.minecraft.world.level.levelgen.GenerationStep.Decorationに存在する値が使用可能"
+	],
+	"type": "forge:add_features",
+	"biomes": "#minecraft:is_overworld",
+	"features": "st_example:lake_gold_place",
+	"step": "top_layer_modification"
+}

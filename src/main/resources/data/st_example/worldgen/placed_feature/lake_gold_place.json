@@ -1,0 +1,28 @@
+{
+	"__comment": [
+		"featureの値でconfigured_featureにあるファイルを指定",
+		"placementに記述されたルールに基づいて得られた座標に対して",
+		"configured_featureで指定された構造物を生成する"
+	],
+	"feature": "st_example:lake_gold_config",
+	"placement": [
+		{
+			"type": "minecraft:in_square"
+		},
+		{
+			"type": "minecraft:heightmap",
+			"heightmap": "OCEAN_FLOOR_WG"
+		},
+		{
+			"type": "rarity_filter",
+			"chance": 2
+		},
+		{
+			"type": "minecraft:block_predicate_filter",
+			"predicate": {
+				"type": "minecraft:matching_fluids",
+				"fluids": "minecraft:water"
+			}
+		}
+	]
+}

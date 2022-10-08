@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/macguffin"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "st_example:macguffin"
+  }
+}

@@ -1,0 +1,70 @@
+{
+	"__comment": [
+		"基本的にはfeatureでconfigured_featureにあるファイルをを指定して",
+		"placementでチャンク内の配置場所を決める方法が良い",
+		"本来configured_featureに書くべき内容を直接ここで記述することもできる",
+		"この方法だと、設定したconfigured_featureの使いまわしができないため取り回しは多少悪いが",
+		"1つのファイル内で完結するため、生成ルールが分かりやすいという利点もある"
+	],
+	"__configure_comment": [
+		"ブロック数が9の鉱脈を生成する",
+		"空気ブロックに触れていても生成確率は下がらない",
+		"minecraft:stone_ore_replaceablesのタグが付いたブロック(石など)を対象に",
+		"st_example:macguffin_oreで示されるブロック（Macguffin Ore）に置き換える",
+		"minecraft:deepslate_ore_replaceablesのタグが付いたブロック(深層石など)を対象に",
+		"st_example:macguffin_oreで示されるブロック（Deepslate Macguffin Ore）に置き換える"
+	],
+	"feature": {
+		"type": "minecraft:ore",
+		"config": {
+			"size": 9,
+			"discard_chance_on_air_exposure": 0,
+			"targets": [
+				{
+					"target": {
+						"predicate_type": "minecraft:tag_match",
+						"tag": "minecraft:stone_ore_replaceables"
+					},
+					"state": {
+						"Name": "st_example:macguffin_ore"
+					}
+				},
+				{
+					"target": {
+						"predicate_type": "minecraft:tag_match",
+						"tag": "minecraft:deepslate_ore_replaceables"
+					},
+					"state": {
+						"Name": "st_example:deepslate_macguffin_ore"
+					}
+				}
+			]
+		}
+	},
+	"__placement_comment": [
+		"チャンクあたり10個の鉱脈を生成する",
+		"水平方向は偏りを設定しないランダムな位置に生成する",
+		"高さ-24から56までの間に、設定した値の中央付近に量を偏らせて生成する"
+	],
+	"placement": [
+		{
+			"type": "minecraft:count",
+			"count": 10
+		},
+		{
+			"type": "minecraft:in_square"
+		},
+		{
+			"type": "minecraft:height_range",
+			"height": {
+				"type": "minecraft:trapezoid",
+				"min_inclusive": {
+					"absolute": -24
+				},
+				"max_inclusive": {
+					"absolute": 56
+				}
+			}
+		}
+	]
+}

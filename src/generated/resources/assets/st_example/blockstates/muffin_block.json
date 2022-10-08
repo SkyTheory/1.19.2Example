@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "st_example:block/muffin_block"
+    }
+  }
+}

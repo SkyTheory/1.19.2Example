@@ -1,0 +1,6 @@
+// 1.19.2	2022-10-08T01:29:10.057119	Tags for minecraft:item
+2097fa883ff6a7e39da11ac9f3bf53e34fda8a38 data/forge/tags/items/gems/macguffin.json
+166625911713c0e66437e1d88fcc6ae2d2cb4bb8 data/forge/tags/items/ores/macguffin.json
+11fc7f3e79fe559d0443aeb9970a61fd669e8a25 data/forge/tags/items/ores_in_ground/deepslate.json
+b0d94e7412fc9e2cf3754985d2c28caa22c1652d data/forge/tags/items/ores_in_ground/stone.json
+f61cb1b58f3acc1542a437f49c281b4dcb86f1ec data/forge/tags/items/storage_blocks/macguffin.json
