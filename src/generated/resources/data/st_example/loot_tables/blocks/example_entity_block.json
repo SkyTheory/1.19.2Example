@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "st_example:example_block_entity"
+          "name": "st_example:example_entity_block"
         }
       ],
       "rolls": 1.0

@@ -28,7 +28,7 @@ public class ExampleBlockEntityRenderer implements BlockEntityRenderer<ExampleBl
 		VertexConsumer vertexConsumer = bufferSource.getBuffer(renderType);
 		poseStack.scale(-1.0f, -1.0f, 1.0f);
 		poseStack.translate(-0.5f, -1.5f, 0.5f);
-		this.model.render(poseStack, vertexConsumer, light, overlay);
+		this.model.renderToBuffer(poseStack, vertexConsumer, light, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 }

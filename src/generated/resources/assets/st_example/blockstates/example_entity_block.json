@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "st_example:block/example_entity_block"
+    }
+  }
+}

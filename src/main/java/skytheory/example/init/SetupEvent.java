@@ -1,4 +1,4 @@
-package skytheory.example.event;
+package skytheory.example.init;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -23,9 +23,13 @@ import skytheory.example.data.ExampleLaungageProviderJP;
 import skytheory.example.data.ExampleLootTableProvider;
 import skytheory.example.data.ExampleRecipeProvider;
 import skytheory.example.entity.ExampleEntity;
-import skytheory.example.init.BlockInit;
-import skytheory.example.init.EntityInit;
 
+/**
+ * Modの基本情報を構築するイベントをまとめたクラス
+ * 初期化時にここのイベントが色々呼ばれて、様々な登録処理を行う
+ * @author SkyTheory
+ *
+ */
 public class SetupEvent {
 
 	/**
@@ -63,6 +67,8 @@ public class SetupEvent {
 	 * runDataを実行した際に呼ばれる
 	 * generatorに色々登録することで、jsonファイルの自動生成をしてくれる
 	 * 基本的に開発環境用。使い方さえ分かればかなり便利だが、やや難解
+	 * 具体的な使用例はdataパッケージ内を参照すること
+	 * 
 	 * @param event
 	 */
 	@SubscribeEvent
@@ -83,21 +89,22 @@ public class SetupEvent {
 
 		/**
 		 * BlockEntityの描画設定用のイベントそのいち
-		 * Rendererを登録して、モデルが作成されていればそれを描画できるようにする
-		 */
-		@SubscribeEvent
-		public static void entityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			event.registerBlockEntityRenderer(BlockInit.EXAMPLE_BLOCK_ENTITY_TYPE.get(), ExampleBlockEntityRenderer::new);
-		}
-
-		/**
-		 * BlockEntityの描画設定用のイベントそのに
 		 * BlockEntityのモデルを作成して、レンダラーで呼び出せるようにする
 		 */
 		@SubscribeEvent
 		public static void registerLayerDefonitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 			event.registerLayerDefinition(ExampleBlockEntityModel.LAYER_LOCATION, ExampleBlockEntityModel::createBodyLayer);
 		}
+
+		/**
+		 * BlockEntityの描画設定用のイベントそのに
+		 * レンダラーを登録して、モデルが作成されていればそれを描画できるようにする
+		 */
+		@SubscribeEvent
+		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+			event.registerBlockEntityRenderer(BlockInit.EXAMPLE_BLOCK_ENTITY_TYPE.get(), ExampleBlockEntityRenderer::new);
+		}
+
 	}
 	
 	/*
@@ -113,24 +120,25 @@ public class SetupEvent {
 		public static void entityAttributeCreation(EntityAttributeCreationEvent event) {
 			event.put(EntityInit.EXAMPLE_ENTITY.get(), ExampleEntity.createAttributeSupplier());
 		}
-		
-		/**
-		 * Entityの描画設定用のイベントそのいち
-		 * Rendererを登録して、モデルが作成されていればそれを描画できるようにする
-		 */
-		@SubscribeEvent
-		public static void entityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			event.registerEntityRenderer(EntityInit.EXAMPLE_ENTITY.get(), ExampleEntityRenderer::new);
-		}
 
 		/**
-		 * Entityの描画設定用のイベントそのに
+		 * Entityの描画設定用のイベントそのいち
 		 * Entityのモデルを作成して、レンダラーで呼び出せるようにする
 		 */
 		@SubscribeEvent
 		public static void registerLayerDefonitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 			event.registerLayerDefinition(ExampleEntityModel.LAYER_LOCATION, ExampleEntityModel::createBodyLayer);
 		}
+		
+		/**
+		 * Entityの描画設定用のイベントそのに
+		 * レンダラーを登録して、モデルが作成されていればそれを描画できるようにする
+		 */
+		@SubscribeEvent
+		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+			event.registerEntityRenderer(EntityInit.EXAMPLE_ENTITY.get(), ExampleEntityRenderer::new);
+		}
+
 	}
 	
 }

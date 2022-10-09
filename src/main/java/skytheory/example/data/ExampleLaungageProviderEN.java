@@ -22,6 +22,7 @@ public class ExampleLaungageProviderEN extends LanguageProvider {
 		this.addBlock(BlockInit.MACGUFFIN_ORE, "Macguffin Ore");
 		this.addBlock(BlockInit.DEEPSLATE_MACGUFFIN_ORE, "Deepslate Macguffin Ore");
 		this.addBlock(BlockInit.MACGUFFIN_BLOCK, "Macguffin Block");
+		this.addBlock(BlockInit.EXAMPLE_ENTITY_BLOCK, "Example Entity Block");
 		this.addEntityType(EntityInit.EXAMPLE_ENTITY, "Understudy");
 	}
 }

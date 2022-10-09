@@ -9,13 +9,21 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import skytheory.example.event.EntityEvent;
-import skytheory.example.event.SetupEvent;
 import skytheory.example.init.BlockInit;
 import skytheory.example.init.EntityInit;
 import skytheory.example.init.ItemInit;
 import skytheory.example.init.LevelGenInit;
+import skytheory.example.init.SetupEvent;
 
-// The value here should match an entry in the META-INF/mods.toml file
+/**
+ * Minecraft 1.19.2環境でMinecraftForgeによるModdingを行うためのサンプルMod
+ * とりあえず、何かを作ってみたい！　と思った時は
+ * 
+ * init内のあれこれをまず見ると良いかも
+ * e.g.) Blockを作ってみたい -> BlockInitを見る
+ * @author SkyTheory
+ *
+ */
 @Mod(ExampleMod.MODID)
 public class ExampleMod
 {

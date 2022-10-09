@@ -23,9 +23,9 @@ import skytheory.example.init.BlockInit;
  * 後者は中身のアイテムという個々の情報を持つためにBlockEntityが必要になる
  * 
  */
-public class ExampleBlock extends Block implements EntityBlock {
+public class ExampleEntityBlock extends Block implements EntityBlock {
 
-	public ExampleBlock(Properties properties) {
+	public ExampleEntityBlock(Properties properties) {
 		super(properties);
 	}
 
@@ -33,6 +33,7 @@ public class ExampleBlock extends Block implements EntityBlock {
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
 		return type == BlockInit.EXAMPLE_BLOCK_ENTITY_TYPE.get() ? ExampleBlockEntity::tick : null;
 	}
+
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new ExampleBlockEntity(pos, state);

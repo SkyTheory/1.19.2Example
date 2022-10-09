@@ -143,7 +143,7 @@ public class LevelGenInit {
 	 */
 	@SuppressWarnings("deprecation")
 	static HolderSet<Biome> biomes = BuiltinRegistries.BIOME.getOrCreateTag(BiomeTags.IS_OVERWORLD);
-	
+
 	/**
 	 * BiomeModifier
 	 * チャンクを生成する時に、ここで指定されたバイオームならば

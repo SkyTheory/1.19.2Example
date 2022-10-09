@@ -22,6 +22,7 @@ public class ExampleLaungageProviderJP extends LanguageProvider {
 		this.addBlock(BlockInit.MACGUFFIN_ORE, "マクガフィン鉱石");
 		this.addBlock(BlockInit.DEEPSLATE_MACGUFFIN_ORE, "深層マクガフィン鉱石");
 		this.addBlock(BlockInit.MACGUFFIN_BLOCK, "マクガフィンブロック");
+		this.addBlock(BlockInit.EXAMPLE_ENTITY_BLOCK, "ブロックエンティティ");
 		this.addEntityType(EntityInit.EXAMPLE_ENTITY, "アンダースタディ");
 	}
 }
