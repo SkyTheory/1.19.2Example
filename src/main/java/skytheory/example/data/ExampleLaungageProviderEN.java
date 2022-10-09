@@ -18,6 +18,7 @@ public class ExampleLaungageProviderEN extends LanguageProvider {
 		this.add("itemGroup." + ExampleMod.MODID, "Example Mod");
 		this.addItem(ItemInit.MUFFIN, "Muffin");
 		this.addItem(ItemInit.MACGUFFIN, "Macguffin");
+		this.addItem(ItemInit.EXAMPLE_SPAWN_EGG, "Understudy Spawn Egg");
 		this.addBlock(BlockInit.MUFFIN_BLOCK, "Muffin Block");
 		this.addBlock(BlockInit.MACGUFFIN_ORE, "Macguffin Ore");
 		this.addBlock(BlockInit.DEEPSLATE_MACGUFFIN_ORE, "Deepslate Macguffin Ore");

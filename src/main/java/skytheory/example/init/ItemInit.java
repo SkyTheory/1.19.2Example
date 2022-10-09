@@ -6,6 +6,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -30,10 +31,11 @@ public class ItemInit {
 	
 	public static final CreativeModeTab EXAMPLE_TAB = ExampleCreativeModeTab.INSTANCE;
 
+	// 無機能アイテムなら、Propertiesはクリエイティブタブ以外は未設定でも問題ない
 	public static final RegistryObject<Item> MACGUFFIN =
-			// 無機能アイテムなら、Propertiesはクリエイティブタブ以外は未設定でも問題ない
 			ITEMS_REGISTRY.register("macguffin", () -> new ExampleItem(new Item.Properties().tab(EXAMPLE_TAB)));
 
+	// 食べ物アイテムも、propertyの設定のみで作成可能
 	public static final RegistryObject<Item> MUFFIN =
 			ITEMS_REGISTRY.register("muffin", () -> new ExampleItem(new Item.Properties()
 					// 最大スタックサイズ
@@ -53,6 +55,11 @@ public class ItemInit {
 					// クリエイティブタブ
 					.tab(EXAMPLE_TAB)
 					));
+	
+	// 追加Entityのスポーンエッグ
+	// バニラのSpawnEggItemではなく、ForgeSpawnEggItemを利用すれば登録処理が多少楽
+	public static final RegistryObject<Item> EXAMPLE_SPAWN_EGG =
+			ITEMS_REGISTRY.register("example_spawn_egg", () -> new ForgeSpawnEggItem(EntityInit.EXAMPLE_ENTITY, 0xEEEEEE, 0x00CCCC, new Item.Properties().tab(EXAMPLE_TAB)));
 
 	/*
 	 *  BlockInitで作成したブロックは、こちらでアイテムとしても登録しておくこと

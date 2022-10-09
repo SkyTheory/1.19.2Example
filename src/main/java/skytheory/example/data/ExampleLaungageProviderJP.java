@@ -18,11 +18,12 @@ public class ExampleLaungageProviderJP extends LanguageProvider {
 		this.add("itemGroup." + ExampleMod.MODID, "Example Mod");
 		this.addItem(ItemInit.MUFFIN, "マフィン");
 		this.addItem(ItemInit.MACGUFFIN, "マクガフィン");
+		this.addItem(ItemInit.EXAMPLE_SPAWN_EGG, "アンダースタディのスポーンエッグ");
 		this.addBlock(BlockInit.MUFFIN_BLOCK, "マフィンブロック");
 		this.addBlock(BlockInit.MACGUFFIN_ORE, "マクガフィン鉱石");
 		this.addBlock(BlockInit.DEEPSLATE_MACGUFFIN_ORE, "深層マクガフィン鉱石");
 		this.addBlock(BlockInit.MACGUFFIN_BLOCK, "マクガフィンブロック");
-		this.addBlock(BlockInit.EXAMPLE_ENTITY_BLOCK, "ブロックエンティティ");
+		this.addBlock(BlockInit.EXAMPLE_ENTITY_BLOCK, "ブロックエンティティサンプル");
 		this.addEntityType(EntityInit.EXAMPLE_ENTITY, "アンダースタディ");
 	}
 }

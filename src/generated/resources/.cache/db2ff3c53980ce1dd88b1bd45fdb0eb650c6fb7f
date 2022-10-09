@@ -1,6 +1,7 @@
-// 1.19.2	2022-10-09T13:11:43.9706557	Item Models: st_example
+// 1.19.2	2022-10-09T21:40:32.6284097	Item Models: st_example
 1bc8a2524b4f94a8ce7cebd3a428725c7035839f assets/st_example/models/item/deepslate_macguffin_ore.json
 727d5a57d8dff48ea3714aefd1092a015df14af3 assets/st_example/models/item/example_entity_block.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/st_example/models/item/example_spawn_egg.json
 26d3323b62a9ad63008aa16ed521ebae0b8a8792 assets/st_example/models/item/macguffin.json
 573572bfae6e2828f72c543b97f94239cb215009 assets/st_example/models/item/macguffin_block.json
 54b7572e159c5eef671648cb2f04c431a533b797 assets/st_example/models/item/macguffin_ore.json
