@@ -8,11 +8,13 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import skytheory.example.event.BlockEvent;
 import skytheory.example.event.EntityEvent;
 import skytheory.example.init.BlockInit;
 import skytheory.example.init.EntityInit;
 import skytheory.example.init.ItemInit;
 import skytheory.example.init.LevelGenInit;
+import skytheory.example.init.MenuInit;
 import skytheory.example.init.SetupEvent;
 
 /**
@@ -48,6 +50,7 @@ public class ExampleMod
 		LevelGenInit.CONFIGURED_FEATURES_REGISTRY.register(modEventBus);
 		LevelGenInit.PLACED_FEATURES_REGISTRY.register(modEventBus);
 		LevelGenInit.BIOME_MODIFIERS_REGISTRY.register(modEventBus);
+		MenuInit.MENU_TYPES_REGISTRY.register(modEventBus);
 		/*
 		 * EventBusにクラスを登録する
 		 * modの初期化時に、ここに登録されたメソッドが呼ばれるようになる
@@ -67,6 +70,7 @@ public class ExampleMod
 		 * 要するに、IModBusEventならあっち、そうでないならこっち！
 		 * その他の使い方は上記と一緒
 		 */
+		MinecraftForge.EVENT_BUS.register(BlockEvent.class);
 		MinecraftForge.EVENT_BUS.register(EntityEvent.class);
 
 	}

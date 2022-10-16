@@ -1,5 +1,6 @@
 package skytheory.example.init;
 
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import skytheory.example.ExampleMod;
+import skytheory.example.client.gui.ExampleContainerScreen;
 import skytheory.example.client.model.block.ExampleBlockEntityModel;
 import skytheory.example.client.model.entity.ExampleEntityModel;
 import skytheory.example.client.renderer.block.ExampleBlockEntityRenderer;
@@ -23,6 +25,8 @@ import skytheory.example.data.ExampleLaungageProviderJP;
 import skytheory.example.data.ExampleLootTableProvider;
 import skytheory.example.data.ExampleRecipeProvider;
 import skytheory.example.entity.ExampleEntity;
+import skytheory.example.inventory.ExampleContainerMenu;
+import skytheory.example.network.PacketHandler;
 
 /**
  * Modの基本情報を構築するイベントをまとめたクラス
@@ -50,6 +54,7 @@ public class SetupEvent {
     @SubscribeEvent
 	public static void commonSetup(FMLCommonSetupEvent event) {
 		ExampleMod.LOGGER.info("Common Setup Event");
+		PacketHandler.setup();
 	}
     
     /**
@@ -61,6 +66,8 @@ public class SetupEvent {
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
 		ExampleMod.LOGGER.info("Client Setup Event");
+		// MenuScreensはクライアント側にのみ存在するのでこちらで登録
+		MenuScreens.register(ExampleContainerMenu.TYPE, ExampleContainerScreen::new);
 	}
 	
 	/**
@@ -84,7 +91,7 @@ public class SetupEvent {
 		generator.addProvider(true, new ExampleLootTableProvider(generator));
 		generator.addProvider(true, new ExampleRecipeProvider(generator));
 	}
-
+	
 	public static class BlockEntity {
 
 		/**
