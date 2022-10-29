@@ -70,4 +70,5 @@ public class ExampleBlockEntityRenderer implements BlockEntityRenderer<ExampleBl
 			}
 		}
 	}
+	
 }

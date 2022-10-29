@@ -18,6 +18,12 @@ import skytheory.example.inventory.ExampleContainerMenu;
 import skytheory.example.network.BlockMessage;
 import skytheory.example.network.PacketHandler;
 
+/**
+ * MenuProviderを継承するオブジェクトはこれである必要はない
+ * ただ、GUIの名前を定義したり、Menuに中身を渡したりするのにここから参照できると便利
+ * @author SkyTheory
+ *
+ */
 public class ExampleBlockEntity extends BlockEntity implements MenuProvider {
 
 	public ExampleBlockEntity(BlockPos pos, BlockState state) {
@@ -34,11 +40,19 @@ public class ExampleBlockEntity extends BlockEntity implements MenuProvider {
 		// 動作させるためにはTickerが必要、詳細はEntityBlock側を参照
 	}
 
+	/**
+	 * MenuProviderからの継承メソッド
+	 * Menuオブジェクトを作成してServerPlayerに渡す
+	 */
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
 		return new ExampleContainerMenu(id, inv, this);
 	}
 
+	/**
+	 * MenuProviderからの継承メソッド
+	 * GUIに表示する名前を定義する
+	 */
 	@Override
 	public Component getDisplayName() {
 		// Component.translatableとすると対応したlangkeyから得られる……はず
@@ -49,6 +63,9 @@ public class ExampleBlockEntity extends BlockEntity implements MenuProvider {
 	/**
 	 * ここでクライアントと同期したいタグのデータを返すようにしておけば
 	 * チャンクの読み込み時にクライアント側でhandleUpdateTagが実行される
+	 * クライアント側でワールドの描画に保持しているアイテムを用いる、みたいな特殊な場合でない限り不要
+	 * 単純なチェストのような、GUIで中身を確認するだけのブロックなら
+	 * そのGUIの方にもともと同期処理があるので、わざわざこちらで同期する必要はない
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

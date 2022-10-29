@@ -1,4 +1,4 @@
-package skytheory.example.data;
+ package skytheory.example.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;

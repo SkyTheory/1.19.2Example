@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import skytheory.example.block.entity.ExampleBlockEntity;
 import skytheory.example.init.BlockInit;
@@ -61,13 +62,6 @@ public class ExampleEntityBlock extends Block implements EntityBlock {
 	}
 
 	/**
-	 * ブロックの形状を指定する
-	 */
-	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext ctx) {
-		return PLATE_AABB;
-	}
-	/**
 	 * tickごとにBlockEntityの処理を呼び出すためのtickerを登録する
 	 */
 	@Override
@@ -100,9 +94,37 @@ public class ExampleEntityBlock extends Block implements EntityBlock {
 			return InteractionResult.SUCCESS;
 		} else {
 			if (level.getBlockEntity(pos) instanceof ExampleBlockEntity entity) {
+				// PlayerにMenuオブジェクトを渡して、GUIを開かせる
 				player.openMenu(entity);
 			}
 			return InteractionResult.CONSUME;
 		}
 	}
+
+	/**
+	 * ブロックの当たり判定を指定する
+	 * もろもろまとめて指定したいなら、getShapeを用いること
+	 * 割と力技で描画問題を解決してるので、あんまり当てにならないかも
+	 */
+	@Override
+	public VoxelShape getCollisionShape(BlockState p_60572_, BlockGetter p_60573_, BlockPos p_60574_,
+			CollisionContext p_60575_) {
+		if (CollisionContext.empty().equals(p_60575_)) {
+			// 基本的に当たり判定を指定したい形状を返せば大丈夫なのだが、描画の都合上こういう実装に
+			// getVisualShapeではなく、こちらの値がクリッピングに使用されているらしいので、それを解決する
+			// もしかしたらもっと良い方法があるのかも、というか存在してほしい、そして教えてほしい
+			return Shapes.block();
+		}
+		return PLATE_AABB;
+	}
+	
+	/**
+	 * 隣のブロックの面を描画するかの判定に用いる
+	 * 基本的に当たり判定と同じで大丈夫だと思う
+	 */
+	@Override
+	public VoxelShape getOcclusionShape(BlockState p_60578_, BlockGetter p_60579_, BlockPos p_60580_) {
+		return PLATE_AABB;
+	}
+
 }

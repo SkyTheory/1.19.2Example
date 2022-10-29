@@ -1,7 +1,8 @@
 {
   "parent": "st_example:block/layered_block",
+  "render_type": "minecraft:translucent",
   "textures": {
-    "mineral": "st_example:block/macguffin_ore",
-    "stone": "minecraft:block/stone"
+    "base": "minecraft:block/stone",
+    "mineral": "st_example:block/macguffin_ore"
   }
 }

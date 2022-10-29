@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:builtin/entity",
+  "ambientocclusion": false,
   "display": {
     "firstperson_lefthand": {
       "rotation": [

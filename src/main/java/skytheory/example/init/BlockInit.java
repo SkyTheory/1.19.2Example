@@ -63,8 +63,7 @@ public class BlockInit {
 			BLOCKS_REGISTRY.register("example_entity_block", () -> new ExampleEntityBlock(BlockBehaviour.Properties
 					.of(Material.STONE)
 					.strength(1.0f, 3.0f)
-					.sound(SoundType.STONE)
-					.noOcclusion()));
+					.sound(SoundType.STONE)));
 
 	// Block Entity
 

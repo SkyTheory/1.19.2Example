@@ -48,12 +48,14 @@ public class ExampleBlockStateProvider extends BlockStateProvider {
 		 * 手動でassets/st_example/models/blockに配置したモデルから、それを継承したモデルを作成する
 		 */
 		this.createChildModel(BlockInit.MACGUFFIN_ORE.get(), new ResourceLocation(ExampleMod.MODID, "block/layered_block"))
-		.texture("stone", new ResourceLocation("minecraft", "block/stone"))
-		.texture("mineral", new ResourceLocation(ExampleMod.MODID, "block/macguffin_ore"));
+		.texture("base", new ResourceLocation("minecraft", "block/stone"))
+		.texture("mineral", new ResourceLocation(ExampleMod.MODID, "block/macguffin_ore"))
+		.renderType(new ResourceLocation("translucent"));
 
 		this.createChildModel(BlockInit.DEEPSLATE_MACGUFFIN_ORE.get(), new ResourceLocation(ExampleMod.MODID, "block/layered_block"))
-		.texture("stone", new ResourceLocation("minecraft", "block/deepslate"))
-		.texture("mineral", new ResourceLocation(ExampleMod.MODID, "block/macguffin_ore"));
+		.texture("base", new ResourceLocation("minecraft", "block/deepslate"))
+		.texture("mineral", new ResourceLocation(ExampleMod.MODID, "block/macguffin_ore"))
+		.renderType(new ResourceLocation("translucent"));
 
 		/*
 		 * 何も描画しないモデルを作成する
@@ -86,6 +88,7 @@ public class ExampleBlockStateProvider extends BlockStateProvider {
 		ModelFile.UncheckedModelFile parent = new ModelFile.UncheckedModelFile("builtin/entity");
 		BlockModelBuilder model = this.modelProvider.getBuilder(this.getRegistryKey(block).getPath())
 				.parent(parent)
+				.ao(false)
 				.texture("particle", particle)
 				.guiLight(GuiLight.SIDE)
 				.transforms()

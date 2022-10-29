@@ -47,7 +47,7 @@ public class ExampleBlockEntityModel extends Model {
 				.texOffs(0, 0).addBox(-8.0F, -4.0F, -8.0F, 16.0F, 4.0F, 16.0F, new CubeDeformation(0.0F))
 				.texOffs(0, 20).addBox(-7.0F, -5.0F, -7.0F, 14.0F, 1.0F, 14.0F, new CubeDeformation(0.0F)),
 				PartPose.offset(0.0F, 24.0F, 0.0F));
-
+		
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
