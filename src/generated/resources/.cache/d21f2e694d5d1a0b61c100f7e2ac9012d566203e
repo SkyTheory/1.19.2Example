@@ -1,11 +1,11 @@
-// 1.19.2	2022-10-09T18:46:15.9118751	Block States: st_example
+// 1.19.2	2022-10-30T06:23:17.6494587	Block States: st_example
 b644092cfc1dea5c7744e870cc95f5e3e1331417 assets/st_example/blockstates/deepslate_macguffin_ore.json
 6dae6b3384d7acaf72468e06a5321812d534a7f4 assets/st_example/blockstates/example_entity_block.json
 673af5920fc125b44e95820d44f3a35e107a39fb assets/st_example/blockstates/macguffin_block.json
 ea3ae347d4a92f143c9c1423bc36183ac2d724bd assets/st_example/blockstates/macguffin_ore.json
 9ec612de202512b24028fb0b128619e939517dfd assets/st_example/blockstates/muffin_block.json
-8f6112f10538f59be5c69aa395342824e2919f08 assets/st_example/models/block/deepslate_macguffin_ore.json
-f5b02834c49a11fb6571cd631996ac6c0a6f7cd7 assets/st_example/models/block/example_entity_block.json
+19bd4476b810a3fe49e919c4a8be8026bcefa5a0 assets/st_example/models/block/deepslate_macguffin_ore.json
+e24dfce42e5e2d570c0f8f5c0c5131b535b06817 assets/st_example/models/block/example_entity_block.json
 2468080106224d0ffb24fbde42c5119b24702cda assets/st_example/models/block/macguffin_block.json
-8e3bba59bccbf639199ab5b18db7106197af4b08 assets/st_example/models/block/macguffin_ore.json
+acdae4221e2fb3f73447e66c8d124b377b89d03c assets/st_example/models/block/macguffin_ore.json
 f16effc4bc1347f7613ad847a86639144003a7c8 assets/st_example/models/block/muffin_block.json

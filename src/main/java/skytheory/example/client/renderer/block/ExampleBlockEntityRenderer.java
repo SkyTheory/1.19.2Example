@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -26,7 +27,7 @@ public class ExampleBlockEntityRenderer implements BlockEntityRenderer<ExampleBl
 
 	public static final ResourceLocation TEXTURE = new ResourceLocation(ExampleMod.MODID, "textures/entity/example_block.png");
 
-	protected final ExampleBlockEntityModel model;
+	protected final Model model;
 	protected final ItemRenderer itemRenderer;
 
 	public ExampleBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
