@@ -25,5 +25,9 @@ public class ExampleLaungageProviderJP extends LanguageProvider {
 		this.addBlock(BlockInit.MACGUFFIN_BLOCK, "マクガフィンブロック");
 		this.addBlock(BlockInit.EXAMPLE_ENTITY_BLOCK, "ブロックエンティティサンプル");
 		this.addEntityType(EntityInit.EXAMPLE_ENTITY, "アンダースタディ");
+		this.add("st_example:advancements.root_title", "足元注意！");
+		this.add("st_example:advancements.root_description", "落下ダメージを受ける");
+		this.add("st_example:advancements.macguffin_title", "チェーホフの銃");
+		this.add("st_example:advancements.macguffin_description", "マクガフィンを投げ捨てる");
 	}
 }

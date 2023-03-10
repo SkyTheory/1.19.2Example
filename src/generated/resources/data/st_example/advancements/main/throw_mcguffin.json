@@ -1,0 +1,35 @@
+{
+  "parent": "st_example:main/root",
+  "criteria": {
+    "throw_macguffin": {
+      "conditions": {
+        "item": {
+          "items": [
+            "st_example:macguffin"
+          ]
+        }
+      },
+      "trigger": "st_example:item_thrrown"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "st_example:advancements.macguffin_description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "st_example:macguffin"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "st_example:advancements.macguffin_title"
+    }
+  },
+  "requirements": [
+    [
+      "throw_macguffin"
+    ]
+  ]
+}

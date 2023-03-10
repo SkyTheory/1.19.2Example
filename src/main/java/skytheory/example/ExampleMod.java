@@ -8,6 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import skytheory.example.event.AdvancementEvent;
 import skytheory.example.event.BlockEvent;
 import skytheory.example.event.EntityEvent;
 import skytheory.example.init.BlockInit;
@@ -70,6 +71,7 @@ public class ExampleMod
 		 * 要するに、IModBusEventならあっち、そうでないならこっち！
 		 * その他の使い方は上記と一緒
 		 */
+		MinecraftForge.EVENT_BUS.register(AdvancementEvent.class);
 		MinecraftForge.EVENT_BUS.register(BlockEvent.class);
 		MinecraftForge.EVENT_BUS.register(EntityEvent.class);
 

@@ -8,5 +8,9 @@
   "item.st_example.example_spawn_egg": "Understudy Spawn Egg",
   "item.st_example.macguffin": "Macguffin",
   "item.st_example.muffin": "Muffin",
-  "itemGroup.st_example": "Example Mod"
+  "itemGroup.st_example": "Example Mod",
+  "st_example:advancements.macguffin_description": "Throw Macguffin.",
+  "st_example:advancements.macguffin_title": "Chekhov's Gun",
+  "st_example:advancements.root_description": "Hurt by falling.",
+  "st_example:advancements.root_title": "Watch your step!"
 }

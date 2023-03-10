@@ -8,5 +8,9 @@
   "item.st_example.example_spawn_egg": "アンダースタディのスポーンエッグ",
   "item.st_example.macguffin": "マクガフィン",
   "item.st_example.muffin": "マフィン",
-  "itemGroup.st_example": "Example Mod"
+  "itemGroup.st_example": "Example Mod",
+  "st_example:advancements.macguffin_description": "マクガフィンを投げ捨てる",
+  "st_example:advancements.macguffin_title": "チェーホフの銃",
+  "st_example:advancements.root_description": "落下ダメージを受ける",
+  "st_example:advancements.root_title": "足元注意！"
 }

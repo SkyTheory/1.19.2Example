@@ -1,9 +1,11 @@
 package skytheory.example.init;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,11 +13,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import skytheory.example.ExampleMod;
+import skytheory.example.advancement.FallingDamageCriterionTrigger;
+import skytheory.example.advancement.ItemThrownCriterionTrigger;
 import skytheory.example.client.gui.ExampleContainerScreen;
 import skytheory.example.client.model.block.ExampleBlockEntityModel;
 import skytheory.example.client.model.entity.ExampleEntityModel;
 import skytheory.example.client.renderer.block.ExampleBlockEntityRenderer;
 import skytheory.example.client.renderer.entity.ExampleEntityRenderer;
+import skytheory.example.data.ExampleAdvancementProvider;
 import skytheory.example.data.ExampleBlockStateProvider;
 import skytheory.example.data.ExampleBlockTagsProvider;
 import skytheory.example.data.ExampleItemModelProvider;
@@ -55,6 +60,9 @@ public class SetupEvent {
 	public static void commonSetup(FMLCommonSetupEvent event) {
 		ExampleMod.LOGGER.info("Common Setup Event");
 		PacketHandler.setup();
+		// 進捗のためのトリガーを登録する
+		CriteriaTriggers.register(new FallingDamageCriterionTrigger());
+		CriteriaTriggers.register(new ItemThrownCriterionTrigger());
 	}
     
     /**
@@ -81,15 +89,17 @@ public class SetupEvent {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
-		BlockTagsProvider blockTagsProvider = new ExampleBlockTagsProvider(generator, ExampleMod.MODID, event.getExistingFileHelper());
-		generator.addProvider(true, new ExampleBlockStateProvider(generator, ExampleMod.MODID, event.getExistingFileHelper()));
+		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+		BlockTagsProvider blockTagsProvider = new ExampleBlockTagsProvider(generator, ExampleMod.MODID, existingFileHelper);
+		generator.addProvider(true, new ExampleBlockStateProvider(generator, ExampleMod.MODID, existingFileHelper));
 		generator.addProvider(true, blockTagsProvider);
-		generator.addProvider(true, new ExampleItemTagsProvider(generator, blockTagsProvider, ExampleMod.MODID, event.getExistingFileHelper()));
-		generator.addProvider(true, new ExampleItemModelProvider(generator, ExampleMod.MODID, event.getExistingFileHelper()));
+		generator.addProvider(true, new ExampleItemTagsProvider(generator, blockTagsProvider, ExampleMod.MODID, existingFileHelper));
+		generator.addProvider(true, new ExampleItemModelProvider(generator, ExampleMod.MODID, existingFileHelper));
 		generator.addProvider(true, new ExampleLaungageProviderEN(generator, ExampleMod.MODID));
 		generator.addProvider(true, new ExampleLaungageProviderJP(generator, ExampleMod.MODID));
 		generator.addProvider(true, new ExampleLootTableProvider(generator));
 		generator.addProvider(true, new ExampleRecipeProvider(generator));
+		generator.addProvider(true, new ExampleAdvancementProvider(generator, existingFileHelper));
 	}
 	
 	public static class BlockEntity {

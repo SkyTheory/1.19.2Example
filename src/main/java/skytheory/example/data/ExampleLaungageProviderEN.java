@@ -25,5 +25,9 @@ public class ExampleLaungageProviderEN extends LanguageProvider {
 		this.addBlock(BlockInit.MACGUFFIN_BLOCK, "Macguffin Block");
 		this.addBlock(BlockInit.EXAMPLE_ENTITY_BLOCK, "Example Entity Block");
 		this.addEntityType(EntityInit.EXAMPLE_ENTITY, "Understudy");
+		this.add("st_example:advancements.root_title", "Watch your step!");
+		this.add("st_example:advancements.root_description", "Hurt by falling.");
+		this.add("st_example:advancements.macguffin_title", "Chekhov's Gun");
+		this.add("st_example:advancements.macguffin_description", "Throw Macguffin.");
 	}
 }

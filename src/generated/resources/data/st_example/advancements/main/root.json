@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "falling_damage": {
+      "conditions": {},
+      "trigger": "st_example:falling_damage"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+    "description": {
+      "translate": "st_example:advancements.root_description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "st_example:muffin"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "st_example:advancements.root_title"
+    }
+  },
+  "requirements": [
+    [
+      "falling_damage"
+    ]
+  ]
+}
