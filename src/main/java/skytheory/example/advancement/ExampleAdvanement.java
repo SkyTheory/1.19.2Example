@@ -37,7 +37,7 @@ public class ExampleAdvanement implements Consumer<Consumer<Advancement>> {
 				.addCriterion("falling_damage", new FallingDamageCriterionTrigger.TriggerInstance(EntityPredicate.Composite.ANY))
 				.save(consumer, "st_example:main/root");
 		
-		Advancement throw_mcguffin = Advancement.Builder.advancement()
+		Advancement.Builder.advancement()
 				.parent(root_advancement)
 				.display(ItemInit.MACGUFFIN.get(), Component.translatable("st_example:advancements.macguffin_title"),
 						Component.translatable("st_example:advancements.macguffin_description"),
