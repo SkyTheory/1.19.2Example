@@ -259,7 +259,7 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 	/**
 	 * ItemHandlerListenerからの継承メソッド
 	 * 内部インベントリに変更があった際に呼ばれる
-	 * データの保存フラグを立てて（アンロード時にnbtの書き込みを行う）
+	 * データの保存フラグを立てておく（アンロード時にnbtの書き込みを行う）
 	 */
 	@Override
 	public void onContentsChanged(InventoryHandler itemHandler, int slot) {
