@@ -18,7 +18,8 @@ public class ExampleBlockLoot extends BlockLoot {
 	protected void addTables() {
 		// 壊せばそのままドロップする、いわゆる普通のブロックはこうして登録
 		this.dropSelf(BlockInit.MACGUFFIN_BLOCK.get());
-		this.dropSelf(BlockInit.EXAMPLE_ENTITY_BLOCK.get());
+		this.dropSelf(BlockInit.DISPLAY_STAND.get());
+		this.dropSelf(BlockInit.SIMPLE_PROCESSOR.get());
 
 		// それ以外はaddからBlockLoot.Builderを登録
 		// 例えば鉱石の場合はこう
@@ -50,6 +51,6 @@ public class ExampleBlockLoot extends BlockLoot {
 	 * ここに登録したBlockの分のデータを作成しないとエラーが発生する
 	 */
 	protected Iterable<Block> getKnownBlocks() {
-		return BlockInit.BLOCKS_REGISTRY.getEntries().stream().map(obj -> obj.get()).toList();
+		return BlockInit.REGISTRY.getEntries().stream().map(obj -> obj.get()).toList();
 	}
 }

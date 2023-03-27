@@ -1,9 +1,10 @@
 {
   "block.st_example.deepslate_macguffin_ore": "Deepslate Macguffin Ore",
-  "block.st_example.example_entity_block": "Example Entity Block",
+  "block.st_example.display_stand": "Display Stand",
   "block.st_example.macguffin_block": "Macguffin Block",
   "block.st_example.macguffin_ore": "Macguffin Ore",
   "block.st_example.muffin_block": "Muffin Block",
+  "block.st_example.simple_processor": "Simple Processor",
   "entity.st_example.example_entity": "Understudy",
   "item.st_example.example_spawn_egg": "Understudy Spawn Egg",
   "item.st_example.macguffin": "Macguffin",

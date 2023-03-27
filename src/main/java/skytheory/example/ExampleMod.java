@@ -11,11 +11,14 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import skytheory.example.event.AdvancementEvent;
 import skytheory.example.event.BlockEvent;
 import skytheory.example.event.EntityEvent;
+import skytheory.example.init.BlockEntityInit;
 import skytheory.example.init.BlockInit;
 import skytheory.example.init.EntityInit;
 import skytheory.example.init.ItemInit;
 import skytheory.example.init.LevelGenInit;
 import skytheory.example.init.MenuInit;
+import skytheory.example.init.RecipeSerializerInit;
+import skytheory.example.init.RecipeTypeInit;
 import skytheory.example.init.SetupEvent;
 
 /**
@@ -43,15 +46,17 @@ public class ExampleMod
 		 *  DeferredRegisterを登録しておく
 		 *  ここに登録されたレジストリから、ゲーム内に要素を追加していく
 		 */
-		BlockInit.BLOCKS_REGISTRY.register(modEventBus);
-		BlockInit.BLOCK_ENTITIES_REGISTRY.register(modEventBus);
-		EntityInit.ENTITIES_REGISTRY.register(modEventBus);
-		ItemInit.ITEMS_REGISTRY.register(modEventBus);
+		BlockInit.REGISTRY.register(modEventBus);
+		BlockEntityInit.REGISTRY.register(modEventBus);
+		EntityInit.REGISTRY.register(modEventBus);
+		ItemInit.REGISTRY.register(modEventBus);
 		LevelGenInit.FEATURES_REGISTRY.register(modEventBus);
 		LevelGenInit.CONFIGURED_FEATURES_REGISTRY.register(modEventBus);
 		LevelGenInit.PLACED_FEATURES_REGISTRY.register(modEventBus);
 		LevelGenInit.BIOME_MODIFIERS_REGISTRY.register(modEventBus);
-		MenuInit.MENU_TYPES_REGISTRY.register(modEventBus);
+		MenuInit.REGISTRY.register(modEventBus);
+		RecipeSerializerInit.REGISTRY.register(modEventBus);
+		RecipeTypeInit.REGISTRY.register(modEventBus);
 		/*
 		 * EventBusにクラスを登録する
 		 * modの初期化時に、ここに登録されたメソッドが呼ばれるようになる
@@ -62,9 +67,6 @@ public class ExampleMod
 		 * 対応するEventひとつが引数
 		 */
 		modEventBus.register(SetupEvent.class);
-		modEventBus.register(SetupEvent.BlockEntity.class);
-		modEventBus.register(SetupEvent.Entity.class);
-
 		/*
 		 * EventBusにクラスを登録する
 		 * 初期化時以外に発生するイベントで、ここに登録されたメソッドが呼ばれるようになる

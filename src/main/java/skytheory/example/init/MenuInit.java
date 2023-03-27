@@ -5,7 +5,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import skytheory.example.ExampleMod;
-import skytheory.example.inventory.ExampleContainerMenu;
+import skytheory.example.gui.DisplayStandMenu;
+import skytheory.example.gui.SimpleProcessorMenu;
 
 /**
  * ゲーム中に表示させるGUIを登録しているクラス
@@ -17,9 +18,12 @@ import skytheory.example.inventory.ExampleContainerMenu;
  */
 public class MenuInit {
 
-	public static final DeferredRegister<MenuType<?>> MENU_TYPES_REGISTRY =
+	public static final DeferredRegister<MenuType<?>> REGISTRY =
 			DeferredRegister.create(ForgeRegistries.MENU_TYPES, ExampleMod.MODID);
+
+	public static final RegistryObject<MenuType<DisplayStandMenu>> DISPLAY_STAND =
+			REGISTRY.register("display_stand", () -> new MenuType<DisplayStandMenu>(DisplayStandMenu.CLIENT_CONTAINER_FACTORY));
 	
-	public static final RegistryObject<MenuType<?>> MENU_TYPE =
-			MENU_TYPES_REGISTRY.register("example_block_menu", () -> ExampleContainerMenu.TYPE);
+	public static final RegistryObject<MenuType<SimpleProcessorMenu>> SIMPLE_PROCESSOR =
+			REGISTRY.register("simple_processor", () -> new MenuType<SimpleProcessorMenu>(SimpleProcessorMenu.CLIENT_CONTAINER_FACTORY));
 }

@@ -1,0 +1,15 @@
+{
+  "type": "st_example:simple_processor",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:apple"
+    }
+  ],
+  "result": {
+    "Count": 1,
+    "id": "minecraft:golden_apple"
+  }
+}

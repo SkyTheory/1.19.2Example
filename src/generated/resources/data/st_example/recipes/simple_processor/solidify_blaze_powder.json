@@ -1,0 +1,21 @@
+{
+  "type": "st_example:simple_processor",
+  "ingredients": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "result": {
+    "Count": 1,
+    "id": "minecraft:blaze_rod"
+  }
+}

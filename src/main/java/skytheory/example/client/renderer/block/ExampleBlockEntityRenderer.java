@@ -20,10 +20,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import skytheory.example.ExampleMod;
-import skytheory.example.block.entity.ExampleBlockEntity;
+import skytheory.example.block.entity.DisplayStandEntity;
 import skytheory.example.client.model.block.ExampleBlockEntityModel;
 
-public class ExampleBlockEntityRenderer implements BlockEntityRenderer<ExampleBlockEntity> {
+public class ExampleBlockEntityRenderer implements BlockEntityRenderer<DisplayStandEntity> {
 
 	public static final ResourceLocation TEXTURE = new ResourceLocation(ExampleMod.MODID, "textures/entity/example_block.png");
 
@@ -36,7 +36,7 @@ public class ExampleBlockEntityRenderer implements BlockEntityRenderer<ExampleBl
 	}
 
 	@Override
-	public void render(ExampleBlockEntity block, float f, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+	public void render(DisplayStandEntity block, float f, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
 		RenderType renderType = RenderType.entitySolid(TEXTURE);
 		VertexConsumer vertexConsumer = bufferSource.getBuffer(renderType);
 		poseStack.translate(0.5f, 0.5f, 0.5f);
@@ -48,7 +48,7 @@ public class ExampleBlockEntityRenderer implements BlockEntityRenderer<ExampleBl
 		renderItem(block, f, poseStack, bufferSource, light, overlay);
 	}
 
-	public void renderItem(ExampleBlockEntity block, float f, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
+	public void renderItem(DisplayStandEntity block, float f, PoseStack poseStack, MultiBufferSource bufferSource, int light, int overlay) {
 		if (block != null) {
 			IItemHandler handler = block.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
 			if (handler != null) {

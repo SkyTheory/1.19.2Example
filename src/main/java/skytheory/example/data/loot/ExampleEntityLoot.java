@@ -62,7 +62,7 @@ public class ExampleEntityLoot extends EntityLoot {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Iterable<EntityType<?>> getKnownEntities() {
-		var entities = EntityInit.ENTITIES_REGISTRY.getEntries().stream().map(obj -> obj.get()).toList();
+		var entities = EntityInit.REGISTRY.getEntries().stream().map(obj -> obj.get()).toList();
 		return (Iterable<EntityType<?>>) entities;
 	}
 }

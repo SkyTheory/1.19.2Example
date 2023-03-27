@@ -6,11 +6,9 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.items.IItemHandler;
 import skytheory.example.ExampleMod;
-import skytheory.example.block.entity.ExampleBlockEntity;
-import skytheory.example.capability.BlockEntityItemHandler;
-import skytheory.example.capability.CapProvider;
+import skytheory.example.block.ItemHandlerBlock;
+import skytheory.example.capability.DataProvider;
 
 public class BlockEvent {
 
@@ -18,9 +16,8 @@ public class BlockEvent {
 	
 	@SubscribeEvent
 	public static void onAttachCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
-		if (event.getObject() instanceof ExampleBlockEntity block) {
-			IItemHandler handler = new BlockEntityItemHandler(block, 1);
-			ICapabilityProvider cap = new CapProvider<IItemHandler>(ForgeCapabilities.ITEM_HANDLER, handler);
+		if (event.getObject() instanceof ItemHandlerBlock<?> block) {
+			ICapabilityProvider cap = new DataProvider<>(ForgeCapabilities.ITEM_HANDLER, block::getItemHandler, block::getSerializer);
 			event.addCapability(EXAMPLE_INVENTORY, cap);
 		}
 	}
