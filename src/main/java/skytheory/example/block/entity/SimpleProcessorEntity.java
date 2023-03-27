@@ -7,8 +7,6 @@ import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import com.mojang.logging.LogUtils;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -138,13 +136,94 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 	}
 
 	/**
+	 * インプットのインベントリに入っているアイテムから、レシピか利用可能かの判定を行う
+	 */
+	public void updateRecipe() {
+		// インプット側に入っているItemStackのリストを作成して
+		List<ItemStack> items = new ArrayList<>();
+		for (int i = 0; i < input.getSlots(); i++) {
+			items.add(input.getStackInSlot(i));
+		}
+		// 利用するレシピを取得
+		Optional<SimpleProcessorRecipe> recipe = SimpleProcessorRecipe.getRecipe(getLevel(), items);
+		if (!currentRecipe.equals(recipe)) {
+			currentRecipe = recipe;
+			this.progress = 0;
+		}
+	}
+
+	/**
+	 * 現在の加工タイマーの値をNBTに書き込む
+	 * インベントリの内容を保存するのはCapabilityの方でよしなにやってくれる
+	 * {@link skytheory.example.capability.DataProvider#serializeNBT()}
+	 */
+	@Override
+	public void saveAdditional(CompoundTag pCompoundTag) {
+		super.saveAdditional(pCompoundTag);
+		pCompoundTag.putInt("Progress", this.progress);
+	}
+
+	/**
+	 * 現在の加工タイマーの値をNBTから読みこむ
+	 * インベントリの内容を復元するのはIItemHandlerの方でよしなにやってくれる
+	 * {@link skytheory.example.capability.DataProvider#deserializeNBT(Tag)}
+	 */
+	@Override
+	public void load(CompoundTag pCompoundTag) {
+		super.load(pCompoundTag);
+	}
+
+	/**
+	 * BlockEntityの読み込み時に実行される
+	 * 加工タイマーをリセットすることなく、レシピの初期化を行う
+	 */
+	@Override
+	public void onLoad() {
+		super.onLoad();
+		List<ItemStack> items = new ArrayList<>();
+		for (int i = 0; i < input.getSlots(); i++) {
+			items.add(input.getStackInSlot(i));
+		}
+		// 利用するレシピを取得
+		Optional<SimpleProcessorRecipe> recipeOpt = SimpleProcessorRecipe.getRecipe(getLevel(), items);
+		this.currentRecipe = recipeOpt;
+	}
+
+	/**
+	 * MenuProviderからの継承メソッド
+	 * AbstractContainerMenuを作成して、プレイヤーに表示するGUIとして返す
+	 */
+	@Override
+	public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
+		return new SimpleProcessorMenu(id, inv, this);
+	}
+
+	/**
+	 * MenuProviderからの継承メソッド
+	 * GUI左上に表示する文字列を返す
+	 */
+	@Override
+	public Component getDisplayName() {
+		return Component.translatable("block.st_example.simple_processor");
+	}
+
+	/**
+	 * ItemHandlerBlockからの継承メソッド
 	 * 下面からの接続にはアウトプットを返し、それ以外からの接続にはインプットを返す
+	 * {@link skytheory.example.event.BlockEvent#onAttachCapabilities(net.minecraftforge.event.AttachCapabilitiesEvent)}
+	 * {@link skytheory.example.capability.DataProvider}
 	 */
 	@Override
 	public @Nullable IItemHandler getItemHandler(Direction direction) {
 		return direction == Direction.DOWN ? outputAccessor : inputAccessor;
 	}
 
+	/**
+	 * ItemHandlerBlockからの継承メソッド
+	 * IItemHandlerのデータの読み書きを行うためのシリアライザーを渡す
+	 * {@link skytheory.example.event.BlockEvent#onAttachCapabilities(net.minecraftforge.event.AttachCapabilitiesEvent)}
+	 * {@link skytheory.example.capability.DataProvider}
+	 */
 	@Override
 	public @NotNull INBTSerializable<ListTag> getSerializer() {
 		return new INBTSerializable<ListTag>() {
@@ -168,71 +247,8 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 		};
 	}
 
-	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
-		return new SimpleProcessorMenu(id, inv, this);
-	}
-
-	@Override
-	public Component getDisplayName() {
-		return Component.translatable("block.st_example.simple_processor");
-	}
-
 	/**
-	 * インプットのインベントリに入っているアイテムから、レシピか利用可能かの判定を行う
-	 */
-	public void updateRecipe() {
-		// インプット側に入っているItemStackのリストを作成して
-		List<ItemStack> items = new ArrayList<>();
-		for (int i = 0; i < input.getSlots(); i++) {
-			items.add(input.getStackInSlot(i));
-		}
-		// 利用するレシピを取得
-		Optional<SimpleProcessorRecipe> recipe = SimpleProcessorRecipe.getRecipe(getLevel(), items);
-		if (!currentRecipe.equals(recipe)) {
-			currentRecipe = recipe;
-			this.progress = 0;
-		}
-	}
-
-	/**
-	 * 現在の加工タイマーの値をNBTに書き込む
-	 * インベントリの内容を保存するのはIItemHandlerの方でよしなにやってくれる
-	 */
-	@Override
-	public void saveAdditional(CompoundTag pCompoundTag) {
-		super.saveAdditional(pCompoundTag);
-		pCompoundTag.putInt("Progress", this.progress);
-	}
-
-	/**
-	 * 現在の加工タイマーの値をNBTから読みこむ
-	 * インベントリの内容を復元するのはIItemHandlerの方でよしなにやってくれる
-	 */
-	@Override
-	public void load(CompoundTag pCompoundTag) {
-		super.load(pCompoundTag);
-		this.progress = pCompoundTag.getInt("Progress");
-		LogUtils.getLogger().debug("Progress at NBT Loaded: " + this.progress);
-	}
-
-	/**
-	 * BlockEntityの読み込み時に実行される
-	 * 加工タイマーをリセットすることなく、レシピの初期化を行う
-	 */
-	@Override
-	public void onLoad() {
-		super.onLoad();
-		List<ItemStack> items = new ArrayList<>();
-		for (int i = 0; i < input.getSlots(); i++) {
-			items.add(input.getStackInSlot(i));
-		}
-		// 利用するレシピを取得
-		Optional<SimpleProcessorRecipe> recipeOpt = SimpleProcessorRecipe.getRecipe(getLevel(), items);
-		this.currentRecipe = recipeOpt;
-	}
-
-	/**
+	 * ItemHandlerListenerからの継承メソッド
 	 * NBTから内部インベントリを読み込んだ際に呼ばれる
 	 * 特に何もしない
 	 */
@@ -241,6 +257,7 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 	}
 
 	/**
+	 * ItemHandlerListenerからの継承メソッド
 	 * 内部インベントリに変更があった際に呼ばれる
 	 * データの保存フラグを立てて（アンロード時にnbtの書き込みを行う）
 	 */
