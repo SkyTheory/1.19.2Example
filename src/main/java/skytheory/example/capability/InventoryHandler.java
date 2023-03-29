@@ -57,4 +57,5 @@ public class InventoryHandler extends ItemStackHandler {
 			listener.onContentsChanged(this, slot);
 		}
 	}
+
 }
