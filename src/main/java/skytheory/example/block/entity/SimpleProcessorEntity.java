@@ -64,6 +64,8 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 		this.output = new InventoryHandler(1);
 		// 内容物に変更があれば、setChangedを呼ぶ
 		output.addChangedListener(this::setChanged);
+		// 更に、アイテムの出力の一時停止を解除する
+		output.addChangedListener(() -> this.pause = false);
 		
 		// inputに対する、搬入可、搬出不可でのアクセスができるIItemHandlerを作成
 		this.inputAccessor = new ItemHandlerWrapperInsertOnly(input);
@@ -107,7 +109,7 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 			 *  progressを1増やして（加工タイマーを1個進めて）
 			 *  それがPROCESSING_TIME以上か（タイマーが進み切ったか）をチェックする
 			 */
-			++progress;
+			progress = Math.min(progress + 1, PROCESSING_TIME);
 			this.setChanged();
 			if (progress >= PROCESSING_TIME) {
 				// 加工を一時停止していなければ
