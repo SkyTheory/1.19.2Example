@@ -89,8 +89,6 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 	 * ここのaddSlotで追加したスロットのItemStack及びaddDataSlotで追加したint値が同期対象となる<br>
 	 */
 	public void clientTick() {
-		List<IItemHandler> handlers = new ArrayList<>();
-		handlers.stream().reduce(0, (i, h) -> Integer.sum(i, h.getSlots()), Integer::sum);
 	}
 
 	/**
