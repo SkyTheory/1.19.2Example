@@ -78,17 +78,17 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 	}
 
 	/**
-	 * クライアント側でtickごとに何かする<br>
-	 * 動作させるためにはTickerが必要、詳細はBlock側を参照<br>
-	 * なお、このBlockEntityではクライアント側では何もしない<br>
-	 * <br>
-	 * 例えば、描画のためにクライアント側でも内容物の更新を行わなければならない場合など<br>
-	 * クライアント側で（あるいは、サーバー・クライアントの両方）で必要な処理がある場合はここに記述<br>
-	 * <br>
-	 * ただし、GUI上でのみ同期が必要なときだけサーバーからデータを同期してプレイヤーに見せる、という場合は<br>
-	 * BlockEntityではなく、AbstractContainerMenu側で同期を行う方法もある<br>
-	 * {@link skytheory.example.gui.SimpleProcessorMenu}<br>
-	 * ここのaddSlotで追加したスロットのItemStack及びaddDataSlotで追加したint値が同期対象となる<br>
+	 * クライアント側でtickごとに何かする
+	 * 動作させるためにはTickerが必要、詳細はBlock側を参照
+	 * なお、このBlockEntityではクライアント側では何もしない
+	 * 
+	 * 例えば、描画のためにクライアント側でも内容物の更新を行わなければならない場合など
+	 * クライアント側で（あるいは、サーバー・クライアントの両方）で必要な処理がある場合はここに記述
+	 * 
+	 * ただし、GUI上でプレイヤーに見せるためにのみ同期が必要という場合は
+	 * BlockEntityではなく、AbstractContainerMenu側で同期を行う方法もある
+	 * {@link skytheory.example.gui.SimpleProcessorMenu}
+	 * ここのaddSlotで追加したスロットのItemStack及びaddDataSlotで追加したint値が同期対象となる
 	 */
 	public void clientTick() {
 	}
