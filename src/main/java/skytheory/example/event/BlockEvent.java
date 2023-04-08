@@ -12,7 +12,7 @@ import skytheory.example.capability.DataProvider;
 
 public class BlockEvent {
 
-	public static final ResourceLocation EXAMPLE_INVENTORY = new ResourceLocation(ExampleMod.MODID);
+	public static final ResourceLocation EXAMPLE_INVENTORY = new ResourceLocation(ExampleMod.MODID, "inventory");
 	
 	@SubscribeEvent
 	public static void onAttachCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {
