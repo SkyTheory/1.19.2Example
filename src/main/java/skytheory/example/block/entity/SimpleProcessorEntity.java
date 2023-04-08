@@ -102,6 +102,7 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 		if (this.inputChanged) {
 			// クラフトするレシピの検証を行う
 			this.updateRecipe();
+			this.inputChanged = false;
 		}
 		// 利用可能なレシピがある（材料が全部インプットのスロットに入っている）場合
 		if (currentRecipe.isPresent()) {
