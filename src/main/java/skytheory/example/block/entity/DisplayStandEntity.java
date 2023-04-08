@@ -16,11 +16,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.PacketDistributor;
 import skytheory.example.block.ItemHandlerBlock;
 import skytheory.example.capability.InventoryHandler;
-import skytheory.example.capability.ItemHandlerListener;
 import skytheory.example.gui.DisplayStandMenu;
 import skytheory.example.init.BlockEntityInit;
 import skytheory.example.network.BlockMessage;
@@ -32,13 +30,15 @@ import skytheory.example.network.PacketHandler;
  * @author SkyTheory
  *
  */
-public class DisplayStandEntity extends BlockEntity implements MenuProvider, ItemHandlerBlock<CompoundTag>, ItemHandlerListener {
+public class DisplayStandEntity extends BlockEntity implements MenuProvider, ItemHandlerBlock<CompoundTag> {
 
-	public ItemStackHandler itemStackHandler;
+	public InventoryHandler itemStackHandler;
 
 	public DisplayStandEntity(BlockPos pos, BlockState state) {
 		super(BlockEntityInit.DISPLAY_STAND.get(), pos, state);
-		this.itemStackHandler = new InventoryHandler(1, this);
+		this.itemStackHandler = new InventoryHandler(1);
+		// 内容に変更があった際に、onContentsChangedを呼ぶ
+		itemStackHandler.addChangedListener(this::onContentsChanged);
 	}
 
 	/**
@@ -109,19 +109,10 @@ public class DisplayStandEntity extends BlockEntity implements MenuProvider, Ite
 	}
 	
 	/**
-	 * NBTから内部インベントリを読み込んだ際に呼ばれる
-	 * 特に何もしない
-	 */
-	@Override
-	public void onLoad(InventoryHandler itemHandler) {
-	}
-	
-	/**
 	 * InventoryHandlerの実装の方でこれを呼び出すようにしてある
 	 * インベントリの中身に変更があった際にこれが呼び出される
 	 */
-	@Override
-	public void onContentsChanged(InventoryHandler itemHandler, int slot) {
+	public void onContentsChanged() {
 		if (!this.level.isClientSide()) {
 			// これが呼び出されると、チャンクのアンロード時などに中身のデータを保存してくれる
 			// 逆に言えば、適切にこれが呼ばれていないとデータの書き込みが行われず、ログアウトした際などに変更をロストする

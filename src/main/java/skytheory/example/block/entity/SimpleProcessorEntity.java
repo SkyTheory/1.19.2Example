@@ -25,14 +25,13 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import skytheory.example.block.ItemHandlerBlock;
 import skytheory.example.capability.InventoryHandler;
-import skytheory.example.capability.ItemHandlerListener;
 import skytheory.example.capability.ItemHandlerWrapperExtractOnly;
 import skytheory.example.capability.ItemHandlerWrapperInsertOnly;
 import skytheory.example.gui.SimpleProcessorMenu;
 import skytheory.example.init.BlockEntityInit;
 import skytheory.example.recipe.SimpleProcessorRecipe;
 
-public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, ItemHandlerBlock<ListTag>, ItemHandlerListener {
+public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, ItemHandlerBlock<ListTag> {
 
 	// 200tick（10秒）掛けてアイテムのクラフトを行う
 	public static final int PROCESSING_TIME = 200;
@@ -55,29 +54,43 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 	public SimpleProcessorEntity(BlockPos pos, BlockState state) {
 		super(BlockEntityInit.SIMPLE_PROCESSOR.get(), pos, state);
 		// 4スロットのインベントリを作成
-		this.input = new InventoryHandler(4, this);
+		this.input = new InventoryHandler(4);
+		// 内容物に変更があれば、setChangedを呼ぶ
+		input.addChangedListener(this::setChanged);
+		// 更に、次のtickでレシピの検証を行うようにフラグを更新する
+		input.addChangedListener(() -> this.inputChanged = true);
+		
 		// 1スロットのインベントリを作成
-		this.output = new InventoryHandler(1, this);
+		this.output = new InventoryHandler(1);
+		// 内容物に変更があれば、setChangedを呼ぶ
+		output.addChangedListener(this::setChanged);
+		
 		// inputに対する、搬入可、搬出不可でのアクセスができるIItemHandlerを作成
 		this.inputAccessor = new ItemHandlerWrapperInsertOnly(input);
+		
 		// outputに対する、搬出可、搬入不可でのアクセスができるIItemHandlerを作成
 		this.outputAccessor = new ItemHandlerWrapperExtractOnly(output);
+		
 		// Optionalを扱うのならば、必ず初期化を行う（Optional型にnullが入っている状態を作らない）こと！
 		this.currentRecipe = Optional.empty();
 	}
 
 	/**
-	 * クライアント側でtickごとに何かする
-	 * 動作させるためにはTickerが必要、詳細はBlock側を参照
-	 * 
+	 * クライアント側でtickごとに何かする<br>
+	 * 動作させるためにはTickerが必要、詳細はBlock側を参照<br>
+	 * なお、このBlockEntityではクライアント側では何もしない<br>
+	 * <br>
+	 * 例えば、描画のためにクライアント側でも内容物の更新を行わなければならない場合など<br>
+	 * クライアント側で（あるいは、サーバー・クライアントの両方）で必要な処理がある場合はここに記述<br>
+	 * <br>
+	 * ただし、GUI上でのみ同期が必要なときだけサーバーからデータを同期してプレイヤーに見せる、という場合は<br>
+	 * BlockEntityではなく、AbstractContainerMenu側で同期を行う方法もある<br>
+	 * {@link skytheory.example.gui.SimpleProcessorMenu}<br>
+	 * ここのaddSlotで追加したスロットのItemStack及びaddDataSlotで追加したint値が同期対象となる<br>
 	 */
 	public void clientTick() {
-		/*
-		 * クライアント側では何もしない
-		 * 必要なとき（例えば、GUIを開いている時）だけサーバーからデータを同期してプレイヤーに見せる、ということも可能
-		 * その場合、AbstractContainerMenu側で同期を行う
-		 * クライアント側のみ（あるいは、サーバー・クライアントの両方）で必要な処理がある場合はここに記述
-		 */
+		List<IItemHandler> handlers = new ArrayList<>();
+		handlers.stream().reduce(0, (i, h) -> Integer.sum(i, h.getSlots()), Integer::sum);
 	}
 
 	/**
@@ -246,29 +259,5 @@ public class SimpleProcessorEntity extends BlockEntity implements MenuProvider, 
 
 		};
 	}
-
-	/**
-	 * ItemHandlerListenerからの継承メソッド
-	 * NBTから内部インベントリを読み込んだ際に呼ばれる
-	 * 特に何もしない
-	 */
-	@Override
-	public void onLoad(InventoryHandler itemHandler) {
-	}
-
-	/**
-	 * ItemHandlerListenerからの継承メソッド
-	 * 内部インベントリに変更があった際に呼ばれる
-	 * データの保存フラグを立てておく（アンロード時にnbtの書き込みを行う）
-	 */
-	@Override
-	public void onContentsChanged(InventoryHandler itemHandler, int slot) {
-		this.setChanged();
-		// インプットのスロットに変更があれば、次のtickでレシピの検証を行う
-		if (itemHandler == input) {
-			this.inputChanged = true;
-		}
-		this.pause = false;
-	}
-
+	
 }
